@@ -7,8 +7,11 @@
 //
 
 #import "ViewController.h"
+#import <MailCore/mailcore.h>
+
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 
 @end
 
@@ -20,10 +23,12 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (IBAction)buttonPressed:(id)sender {
+    MCOMailProvider *accountProvider = [[MCOMailProvidersManager sharedManager] providerForEmail:self.emailTextField.text];
+    NSArray *smtpServicesArray = accountProvider.smtpServices;
+    NSLog(@"smtpServicesArray:%@",smtpServicesArray);
 }
+
 
 @end
